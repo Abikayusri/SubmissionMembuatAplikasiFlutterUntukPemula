@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:submission_flutter_untuk_pemula/utils/error_snackbar.dart';
+import 'package:submission_flutter_untuk_pemula/utils/snackbar_extension.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -24,25 +24,11 @@ class _RegisterPageState extends State<RegisterPage> {
     String password = passwordController.text.trim();
 
     if (username.isEmpty || password.isEmpty) {
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(
-      //     content: Text('Username dan Password tidak boleh kosong!'),
-      //     backgroundColor: Colors.red,
-      //   ),
-      // );
-
       context.showErrorSnackBar('Username dan Password tidak boleh kosong!');
       return;
     }
 
     if (password.length < 6) {
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(
-      //     content: Text('Password minimal 6 karakter!'),
-      //     backgroundColor: Colors.red,
-      //   ),
-      // );
-
       context.showErrorSnackBar('Password minimal 6 karakter!');
       return;
     }

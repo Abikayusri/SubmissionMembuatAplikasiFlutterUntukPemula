@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:submission_flutter_untuk_pemula/utils/error_snackbar.dart';
+import 'package:submission_flutter_untuk_pemula/utils/snackbar_extension.dart';
 
 class HomePage extends StatefulWidget {
   final String username;

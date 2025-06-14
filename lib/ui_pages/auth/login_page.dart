@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:submission_flutter_untuk_pemula/ui_pages/auth/register_page.dart';
-import 'package:submission_flutter_untuk_pemula/utils/error_snackbar.dart';
+import 'package:submission_flutter_untuk_pemula/utils/snackbar_extension.dart';
 
 import '../dashboard/home_page.dart';
 
@@ -34,13 +34,6 @@ class _LoginPageState extends State<LoginPage> {
     String inputPassword = passwordController.text.trim();
 
     if (inputUsername.isEmpty || inputPassword.isEmpty) {
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(
-      //     content: Text('Username dan Password tidak boleh kosong!'),
-      //     backgroundColor: Colors.red,
-      //   ),
-      // );
-
       context.showErrorSnackBar('Username dan Password tidak boleh kosong!');
       return;
     }
@@ -60,13 +53,6 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
     } else {
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(
-      //     content: Text('Username atau Password salah!'),
-      //     backgroundColor: Colors.red,
-      //   ),
-      // );
-
       context.showErrorSnackBar('Username atau Password salah!');
     }
   }
@@ -82,13 +68,6 @@ class _LoginPageState extends State<LoginPage> {
         registeredUsername = result['username'];
         registeredPassword = result['password'];
       });
-
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(
-      //     content: Text('Registrasi berhasil! Silakan login.'),
-      //     backgroundColor: Colors.green,
-      //   ),
-      // );
 
       context.showSuccessSnackBar('Registrasi berhasil! Silakan login.');
     }
