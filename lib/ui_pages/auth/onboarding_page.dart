@@ -125,6 +125,10 @@ class _OnboardingPagesState extends State<OnboardingPages> {
                   TextButton(
                     onPressed: () {
                       if (currentIndex == 2) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => LoginPage()),
+                        );
                       } else {
                         carouselController.nextPage();
                       }
