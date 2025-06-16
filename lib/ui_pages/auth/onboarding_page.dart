@@ -4,15 +4,15 @@ import 'package:submission_flutter_untuk_pemula/ui_pages/auth/login_page.dart';
 
 class OnboardingData {
   static const List<String> titles = [
-    "One App For Everyone",
-    "Build Using Our Heart",
-    "Let's Go",
+    "Jual Beli Mobil Mudah",
+    "Barang Full Inspeksi",
+    "Gaskeun",
   ];
 
   static const List<String> subTitles = [
-    "Our system is helping all people in one system",
-    "System that make use our heart",
-    "We will guide you to where you wanted it too",
+    "Menyediakan berbagai macam pilihan mobil yang sesuai dengan kebutuhan Anda",
+    "Mobil sudah kita inspeksi agar customer puas",
+    "Dah ayo buru pake aplikasi kita",
   ];
 
   static const List<String> images = [
@@ -161,9 +161,14 @@ class OnboardingContent extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TextButton(
-                  onPressed: onSkip,
-                  child: const Text('SKIP', style: TextStyle(fontSize: 18)),
+                Opacity(
+                  opacity: currentIndex == 2 ? 0.0 : 1.0,
+                  // Transparent tapi space tetap ada
+                  child: TextButton(
+                    onPressed: currentIndex == 2 ? null : onSkip,
+                    // Disable kalau invisible
+                    child: const Text('LEWATI', style: TextStyle(fontSize: 18)),
+                  ),
                 ),
 
                 Row(
@@ -182,10 +187,21 @@ class OnboardingContent extends StatelessWidget {
                   }),
                 ),
 
-                TextButton(
-                  onPressed: onNext,
-                  child: const Text('NEXT', style: TextStyle(fontSize: 18)),
-                ),
+                currentIndex == 2
+                    ? TextButton(
+                        onPressed: onNext,
+                        child: const Text(
+                          'MULAI',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      )
+                    : TextButton(
+                        onPressed: onNext,
+                        child: const Text(
+                          'LANJUTKAN',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
               ],
             ),
           ),
