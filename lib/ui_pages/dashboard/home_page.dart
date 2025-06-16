@@ -48,11 +48,9 @@ class _HomePageState extends State<HomePage> {
           if (constraints.maxWidth <= 600) {
             return PreOwnedCarList();
           } else if (constraints.maxWidth <= 1200) {
-            return PreOwnedCarList();
-            // return PreOwnedCarGrid(gridCount: 4);
+            return PreOwnedCarGrid(gridCount: 4);
           } else {
-            return PreOwnedCarList();
-            // return PreOwnedCarGrid(gridCount: 6);
+            return PreOwnedCarGrid(gridCount: 6);
           }
         },
       ),
@@ -195,6 +193,8 @@ class PreOwnedCarGrid extends StatelessWidget {
       padding: const EdgeInsets.only(left: 16.0, right: 16.0),
       child: GridView.count(
         crossAxisCount: gridCount,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
         children: preOwnedCarListData.map((car) {
           return InkWell(
             onTap: () {
@@ -207,7 +207,103 @@ class PreOwnedCarGrid extends StatelessWidget {
                 ),
               );
             },
-            child: Card(child: Column()),
+            child: Card(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: Container(
+                      height: 140,
+                      child: Image.network(
+                        car.imageAssets,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Container(
+                            color: Colors.grey[300],
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  flex: 3,
+                                  child: Icon(
+                                    Icons.broken_image,
+                                    size: 50,
+                                    color: Colors.grey[600],
+                                  ),
+                                ),
+                                SizedBox(height: 8),
+                                Expanded(
+                                  flex: 2,
+                                  child: Text(
+                                    'Gambar tidak dapat dimuat',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.grey[600],
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return Container(
+                            color: Colors.grey[200],
+                            child: Center(
+                              child: CircularProgressIndicator(
+                                value:
+                                    loadingProgress.expectedTotalBytes != null
+                                    ? loadingProgress.cumulativeBytesLoaded /
+                                          loadingProgress.expectedTotalBytes!
+                                    : null,
+                                color: Colors.teal,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '${car.name} (${car.buyYear})',
+                          style: const TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          car.brand,
+                          style: TextStyle(
+                            fontSize: 14.0,
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          car.price,
+                          style: const TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.teal,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
           );
         }).toList(),
       ),
