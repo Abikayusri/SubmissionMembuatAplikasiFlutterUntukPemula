@@ -36,23 +36,12 @@ class CarDetailPage extends StatelessWidget {
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Column(
-                        children: [
-                          Text('Seller'),
-                          SizedBox(height: 4),
-                          Text(car.sellerName),
-                        ],
-                      ),
 
-                      Column(
-                        children: [
-                          Text('Lokasi'),
-                          SizedBox(height: 4),
-                          Text(car.location),
-                        ],
-                      ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _ikhtisarData('Location', car.location),
+                      _ikhtisarData('Transmition', car.fuelTransmission),
                     ],
                   ),
                 ],
@@ -100,5 +89,40 @@ class CarDetailPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+Widget _ikhtisarData(String title, String description) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      _getIconByTitle(title),
+
+      SizedBox(width: 8),
+
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 4),
+          Text(description),
+        ],
+      ),
+    ],
+  );
+}
+
+Widget _getIconByTitle(String title) {
+  switch (title.toLowerCase()) {
+    case 'seller':
+      return Icon(Icons.person);
+    case 'location':
+      return Icon(Icons.location_on);
+    default:
+      return Icon(Icons.info);
   }
 }

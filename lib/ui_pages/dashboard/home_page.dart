@@ -144,7 +144,7 @@ class PreOwnedCarList extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            car.name,
+                            '${car.name} (${car.buyYear})',
                             style: const TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.bold,
