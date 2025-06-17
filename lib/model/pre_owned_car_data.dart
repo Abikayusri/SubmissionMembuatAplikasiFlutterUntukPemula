@@ -8,6 +8,7 @@ class PreOwnedCarListData {
   String description;
   String location;
   String sellerName;
+  String mileage;
   List<String> imageUrl;
 
   PreOwnedCarListData({
@@ -19,6 +20,7 @@ class PreOwnedCarListData {
     required this.fuelTransmission,
     required this.description,
     required this.location,
+    required this.mileage,
     required this.sellerName,
     required this.imageUrl,
   });
@@ -33,7 +35,8 @@ var preOwnedCarListData = [
     price: 'Rp. 198.000.000',
     buyYear: '2008',
     fuelTransmission: 'Bensin-AT',
-    description: r"""ng!!
+    mileage: '25.000 KM',
+    description: r"""
 Beli mobil dan dapatkan bonus saldo digital hingga Rp1.500.000!
 *S&K berlaku
 
@@ -78,6 +81,7 @@ Ahlinya Mobil Bekas Berkualitas""",
     price: '179.000.000',
     buyYear: '2016',
     fuelTransmission: 'Bensin-AT',
+    mileage: '20.000 KM',
     location: "Cempaka Putih, Jakarta Pusat",
     sellerName: "Budi",
     imageUrl: [
@@ -110,6 +114,7 @@ Dp Rp.19JT Angs Rp.4.781.000x4thn11bln
     price: '160.000.000',
     buyYear: '2015',
     fuelTransmission: 'Bensin-AT',
+    mileage: '30.000 KM',
     location: "Cempaka Putih, Jakarta Pusat",
     sellerName: "Diler",
     imageUrl: [
@@ -165,6 +170,7 @@ Ahlinya Mobil Bekas Berkualitas
     price: '117.000.000',
     buyYear: '2017',
     fuelTransmission: 'Bensin-MT',
+    mileage: '50.000 KM',
     location: "Cempaka Putih, Jakarta Pusat",
     sellerName: "Diler",
     imageUrl: [
@@ -221,6 +227,7 @@ Ahlinya Mobil Bekas Berkualitas
     price: '210.000.000',
     buyYear: '2022',
     fuelTransmission: 'Bensin-AT',
+    mileage: '100.000 KM',
     location: "Cempaka Putih, Jakarta Pusat",
     sellerName: "Diler",
     imageUrl: [
@@ -277,6 +284,7 @@ Ahlinya Mobil Bekas Berkualitas
     price: '1.195.000.000',
     buyYear: '2022',
     fuelTransmission: 'Bensin-AT',
+    mileage: '5.000 KM',
     location: "Gading Serpong, Tangerang Kota",
     sellerName: "Diler",
     imageUrl: [
@@ -335,6 +343,7 @@ Bursa mobil bintaro A28-29""",
     price: '435.000.000',
     buyYear: '2021',
     fuelTransmission: 'Bensin-AT',
+    mileage: '15.000 KM',
     location: "Pancoran, Jakarta Selatan",
     sellerName: "Diler",
     imageUrl: [
@@ -392,6 +401,7 @@ Jalan Gunung Sahari No. 1 Jakarta utara""",
     price: '340.000.000',
     buyYear: '2022',
     fuelTransmission: 'Bensin-AT',
+    mileage: '35.000 KM',
     location: "Mampang Prapatan, Jakarta Selatan",
     sellerName: "Diler",
     imageUrl: [
@@ -425,6 +435,7 @@ More info PM""",
     price: '549.000.000',
     buyYear: '2018',
     fuelTransmission: 'Bensin-AT',
+    mileage: '45.000 KM',
     location: "Kebayoran Baru, Jakarta Selatan",
     sellerName: "Diler",
     imageUrl: [

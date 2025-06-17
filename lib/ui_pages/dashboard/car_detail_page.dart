@@ -37,11 +37,15 @@ class CarDetailPage extends StatelessWidget {
                   ),
                   SizedBox(height: 8),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      _ikhtisarData('Location', car.location),
-                      _ikhtisarData('Transmition', car.fuelTransmission),
+                      _ikhtisarData('Lokasi', car.location),
+                      SizedBox(height: 8),
+                      _ikhtisarData('Transmisi', car.fuelTransmission),
+                      SizedBox(height: 8),
+                      _ikhtisarData('Jarak Tempuh', car.mileage),
                     ],
                   ),
                 ],
@@ -101,16 +105,18 @@ Widget _ikhtisarData(String title, String description) {
 
       SizedBox(width: 8),
 
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 4),
-          Text(description),
-        ],
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 4),
+            Text(description, maxLines: 3, overflow: TextOverflow.ellipsis),
+          ],
+        ),
       ),
     ],
   );
@@ -118,11 +124,13 @@ Widget _ikhtisarData(String title, String description) {
 
 Widget _getIconByTitle(String title) {
   switch (title.toLowerCase()) {
-    case 'seller':
-      return Icon(Icons.person);
-    case 'location':
-      return Icon(Icons.location_on);
+    case 'lokasi':
+      return Icon(Icons.location_on, color: Colors.red, size: 24);
+    case 'jarak tempuh':
+      return Icon(Icons.speed, color: Colors.green, size: 24);
+    case 'transmisi':
+      return Icon(Icons.settings, color: Colors.blue, size: 24);
     default:
-      return Icon(Icons.info);
+      return Icon(Icons.info, color: Colors.grey, size: 24);
   }
 }
