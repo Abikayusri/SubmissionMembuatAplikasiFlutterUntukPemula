@@ -4,35 +4,20 @@ import 'package:submission_flutter_untuk_pemula/utils/snackbar_extension.dart';
 
 import '../dashboard/home_page.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
+  static const String defaultUsername = "Abikayusri";
+  static const String defaultPassword = "Admin123!";
 
-class _LoginPageState extends State<LoginPage> {
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  static String? registeredUsername;
+  static String? registeredPassword;
 
-  // Default credentials
-  final String defaultUsername = "Abikayusri";
-  final String defaultPassword = "Admin123!";
-
-  String? registeredUsername;
-  String? registeredPassword;
-
-  @override
-  void dispose() {
-    usernameController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
-
-  void _login() {
-    String inputUsername = usernameController.text.trim();
-    String inputPassword = passwordController.text.trim();
-
+  void _login(
+    BuildContext context,
+    String inputUsername,
+    String inputPassword,
+  ) {
     if (inputUsername.isEmpty || inputPassword.isEmpty) {
       context.showErrorSnackBar('Username dan Password tidak boleh kosong!');
       return;
@@ -57,17 +42,15 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  void _navigateToRegister() async {
+  void _navigateToRegister(BuildContext context) async {
     final result = await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => RegisterPage()),
     );
 
     if (result != null && result is Map<String, String>) {
-      setState(() {
-        registeredUsername = result['username'];
-        registeredPassword = result['password'];
-      });
+      registeredUsername = result['username'];
+      registeredPassword = result['password'];
 
       context.showSuccessSnackBar('Registrasi berhasil! Silakan login.');
     }
@@ -75,6 +58,9 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController usernameController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+
     return Scaffold(
       body: Center(
         child: Padding(
@@ -117,7 +103,11 @@ class _LoginPageState extends State<LoginPage> {
 
               MaterialButton(
                 minWidth: double.infinity,
-                onPressed: _login,
+                onPressed: () => _login(
+                  context,
+                  usernameController.text.trim(),
+                  passwordController.text.trim(),
+                ),
                 color: Colors.teal,
                 textColor: Colors.white,
                 child: Text('Login'),
@@ -126,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: 24),
 
               TextButton(
-                onPressed: _navigateToRegister,
+                onPressed: () => _navigateToRegister(context),
                 child: Text(
                   'Daftar di sini!',
                   style: TextStyle(fontSize: 18, color: Colors.blue),
