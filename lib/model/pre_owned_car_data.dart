@@ -77,7 +77,7 @@ Ahlinya Mobil Bekas Berkualitas""",
     name: 'Honda Jazz',
     brand: 'Honda',
     imageAssets:
-        'https://apollo.olx.co.id/v1/files/6840225dbb87c-ID/image;s=780x0;q=60',
+        'https://apollo.olx.co.id/v1/files/684a60964c90f-ID/image;s=780x0;q=60',
     price: '179.000.000',
     buyYear: '2016',
     fuelTransmission: 'Bensin-AT',
@@ -85,9 +85,9 @@ Ahlinya Mobil Bekas Berkualitas""",
     location: "Cempaka Putih, Jakarta Pusat",
     sellerName: "Budi",
     imageUrl: [
-      'https://apollo.olx.co.id/v1/files/6840225d2eaf6-ID/image;s=780x0;q=60',
-      'https://apollo.olx.co.id/v1/files/6840225d5878b-ID/image;s=780x0;q=60',
-      'https://apollo.olx.co.id/v1/files/6840225da08ac-ID/image;s=780x0;q=60',
+      'https://apollo.olx.co.id/v1/files/684a6097985c7-ID/image;s=780x0;q=60',
+      'https://apollo.olx.co.id/v1/files/684a60972f308-ID/image;s=780x0;q=60',
+      'https://apollo.olx.co.id/v1/files/684a6098bb98a-ID/image;s=780x0;q=60',
     ],
     description: r"""
 Honda All New Jazz Rs 1.5 A/T Thn 2017 Nik 2016
@@ -110,7 +110,7 @@ Dp Rp.19JT Angs Rp.4.781.000x4thn11bln
     name: 'Nissan X-Trail',
     brand: 'Nissan',
     imageAssets:
-        'https://apollo.olx.co.id/v1/files/68493f6ab35ee-ID/image;s=780x0;q=60',
+        'https://apollo.olx.co.id/v1/files/68527f82c6017-ID/image;s=780x0;q=60',
     price: '160.000.000',
     buyYear: '2015',
     fuelTransmission: 'Bensin-AT',
@@ -118,8 +118,8 @@ Dp Rp.19JT Angs Rp.4.781.000x4thn11bln
     location: "Cempaka Putih, Jakarta Pusat",
     sellerName: "Diler",
     imageUrl: [
-      'https://apollo.olx.co.id/v1/files/68493f6ed434b-ID/image;s=780x0;q=60',
-      'https://apollo.olx.co.id/v1/files/68493f6e6a87e-ID/image;s=780x0;q=60',
+      'https://apollo.olx.co.id/v1/files/68527f853f09b-ID/image;s=780x0;q=60',
+      'https://apollo.olx.co.id/v1/files/68527f82bf571-ID/image;s=780x0;q=60',
     ],
     description: r"""
 .
@@ -223,7 +223,7 @@ Ahlinya Mobil Bekas Berkualitas
     name: 'Wuling Almaz RS',
     brand: 'Wuling',
     imageAssets:
-        'https://apollo.olx.co.id/v1/files/68493d51ecf15-ID/image;s=780x0;q=60',
+        'https://apollo.olx.co.id/v1/files/684cd6d2db4e0-ID/image;s=780x0;q=60',
     price: '210.000.000',
     buyYear: '2022',
     fuelTransmission: 'Bensin-AT',
@@ -231,9 +231,9 @@ Ahlinya Mobil Bekas Berkualitas
     location: "Cempaka Putih, Jakarta Pusat",
     sellerName: "Diler",
     imageUrl: [
-      'https://apollo.olx.co.id/v1/files/68493d51e468e-ID/image;s=780x0;q=60',
-      'https://apollo.olx.co.id/v1/files/68493d5109ec4-ID/image;s=780x0;q=60',
-      'https://apollo.olx.co.id/v1/files/68493d520ac24-ID/image;s=780x0;q=60',
+      'https://apollo.olx.co.id/v1/files/684cd6d1c820a-ID/image;s=780x0;q=60',
+      'https://apollo.olx.co.id/v1/files/684cd6d168fb6-ID/image;s=780x0;q=60',
+      'https://apollo.olx.co.id/v1/files/684cd6d252f1e-ID/image;s=780x0;q=60',
     ],
     description: r"""
 .
