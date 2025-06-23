@@ -61,65 +61,226 @@ class LoginPage extends StatelessWidget {
     final TextEditingController usernameController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
 
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isWeb = screenWidth > 600;
+
+    final horizontalPadding = isWeb
+        ? (screenWidth * 0.2).clamp(20.0, 200.0)
+        : 16.0;
+
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight:
+                  screenHeight -
+                  MediaQuery.of(context).padding.top -
+                  MediaQuery.of(context).padding.bottom,
+            ),
+            child: IntrinsicHeight(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      flex: 1,
+                      child: SizedBox(height: screenHeight * 0.05),
+                    ),
+
+                    Text(
+                      'Selamat Datang di Login Page',
+                      style: TextStyle(
+                        fontSize: isWeb ? 32 : 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+
+                    SizedBox(height: screenHeight * 0.08),
+
+                    _buildLoginForm(
+                      context,
+                      usernameController,
+                      passwordController,
+                      isWeb,
+                    ),
+
+                    Flexible(
+                      flex: 1,
+                      child: SizedBox(height: screenHeight * 0.05),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLoginForm(
+    BuildContext context,
+    TextEditingController usernameController,
+    TextEditingController passwordController,
+    bool isWeb,
+  ) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        _buildInputField(
+          label: 'Username',
+          controller: usernameController,
+          hintText: 'Default: Abikayusri',
+          isWeb: isWeb,
+        ),
+
+        SizedBox(height: screenHeight * 0.03),
+
+        _buildInputField(
+          label: 'Password',
+          controller: passwordController,
+          hintText: 'Default: Admin123!',
+          isPassword: true,
+          isWeb: isWeb,
+        ),
+
+        SizedBox(height: screenHeight * 0.06),
+
+        _buildLoginButton(
+          context,
+          usernameController,
+          passwordController,
+          isWeb,
+        ),
+
+        SizedBox(height: screenHeight * 0.03),
+
+        _buildRegisterLink(context, isWeb),
+      ],
+    );
+  }
+
+  Widget _buildInputField({
+    required String label,
+    required TextEditingController controller,
+    required String hintText,
+    bool isPassword = false,
+    required bool isWeb,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: isWeb ? 18 : 16,
+            fontWeight: FontWeight.w500,
+            color: Colors.black87,
+          ),
+        ),
+        const SizedBox(height: 8),
+        TextField(
+          controller: controller,
+          obscureText: isPassword,
+          style: TextStyle(fontSize: isWeb ? 16 : 14),
+          decoration: InputDecoration(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: Colors.grey.shade300),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: Colors.grey.shade300),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: const BorderSide(color: Colors.teal, width: 2),
+            ),
+            hintText: hintText,
+            hintStyle: TextStyle(
+              color: Colors.grey.shade500,
+              fontSize: isWeb ? 14 : 12,
+            ),
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: isWeb ? 16 : 12,
+            ),
+            filled: true,
+            fillColor: Colors.grey.shade50,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildLoginButton(
+    BuildContext context,
+    TextEditingController usernameController,
+    TextEditingController passwordController,
+    bool isWeb,
+  ) {
+    return SizedBox(
+      height: isWeb ? 56 : 48,
+      child: ElevatedButton(
+        onPressed: () => _login(
+          context,
+          usernameController.text.trim(),
+          passwordController.text.trim(),
+        ),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.teal,
+          foregroundColor: Colors.white,
+          elevation: 2,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+        child: Text(
+          'Login',
+          style: TextStyle(
+            fontSize: isWeb ? 18 : 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRegisterLink(BuildContext context, bool isWeb) {
+    return Center(
+      child: TextButton(
+        onPressed: () => _navigateToRegister(context),
+        style: TextButton.styleFrom(
+          padding: EdgeInsets.symmetric(
+            horizontal: isWeb ? 24 : 16,
+            vertical: isWeb ? 16 : 12,
+          ),
+        ),
+        child: RichText(
+          text: TextSpan(
             children: [
-              Text(
-                'Selamat Datang di Login Page',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-
-              SizedBox(height: 100),
-
-              Align(alignment: Alignment.centerLeft, child: Text('Username')),
-              SizedBox(height: 8),
-              TextField(
-                controller: usernameController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Default: Abikayusri',
+              TextSpan(
+                text: 'Belum punya akun? ',
+                style: TextStyle(
+                  fontSize: isWeb ? 16 : 14,
+                  color: Colors.grey.shade600,
                 ),
               ),
-
-              SizedBox(height: 24),
-
-              Align(alignment: Alignment.centerLeft, child: Text('Password')),
-              SizedBox(height: 8),
-              TextField(
-                controller: passwordController,
-                obscureText: true,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Default: Admin123!',
-                ),
-              ),
-
-              SizedBox(height: 48),
-
-              MaterialButton(
-                minWidth: double.infinity,
-                onPressed: () => _login(
-                  context,
-                  usernameController.text.trim(),
-                  passwordController.text.trim(),
-                ),
-                color: Colors.teal,
-                textColor: Colors.white,
-                child: Text('Login'),
-              ),
-
-              SizedBox(height: 24),
-
-              TextButton(
-                onPressed: () => _navigateToRegister(context),
-                child: Text(
-                  'Daftar di sini!',
-                  style: TextStyle(fontSize: 18, color: Colors.blue),
+              TextSpan(
+                text: 'Daftar di sini!',
+                style: TextStyle(
+                  fontSize: isWeb ? 16 : 14,
+                  color: Colors.blue,
+                  fontWeight: FontWeight.w500,
+                  decoration: TextDecoration.underline,
                 ),
               ),
             ],
