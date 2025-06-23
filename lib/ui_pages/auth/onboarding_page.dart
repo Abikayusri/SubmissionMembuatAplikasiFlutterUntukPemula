@@ -58,26 +58,28 @@ class _OnboardingPagesState extends State<OnboardingPages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          if (constraints.maxWidth <= 600) {
-            return OnboardingMobile(
-              currentIndex: currentIndex,
-              carouselController: carouselController,
-              onIndexChanged: _updateIndex,
-              onSkip: _navigateToLogin,
-              onNext: _handleNext,
-            );
-          } else {
-            return OnboardingWeb(
-              currentIndex: currentIndex,
-              carouselController: carouselController,
-              onIndexChanged: _updateIndex,
-              onSkip: _navigateToLogin,
-              onNext: _handleNext,
-            );
-          }
-        },
+      body: SafeArea(
+        child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            if (constraints.maxWidth <= 600) {
+              return OnboardingMobile(
+                currentIndex: currentIndex,
+                carouselController: carouselController,
+                onIndexChanged: _updateIndex,
+                onSkip: _navigateToLogin,
+                onNext: _handleNext,
+              );
+            } else {
+              return OnboardingWeb(
+                currentIndex: currentIndex,
+                carouselController: carouselController,
+                onIndexChanged: _updateIndex,
+                onSkip: _navigateToLogin,
+                onNext: _handleNext,
+              );
+            }
+          },
+        ),
       ),
     );
   }
@@ -103,106 +105,209 @@ class OnboardingContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CarouselSlider(
-            items: OnboardingData.images.map((imagePath) {
-              return Image.asset(
-                imagePath,
-                height: 331,
-                width: isWeb ? double.infinity : null,
-                fit: isWeb ? BoxFit.cover : BoxFit.contain,
-              );
-            }).toList(),
-            options: CarouselOptions(
-              height: 331,
-              viewportFraction: 1,
-              enableInfiniteScroll: false,
-              onPageChanged: (index, reason) {
-                onIndexChanged(index);
-              },
-            ),
-            carouselController: carouselController,
-          ),
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
 
-          const SizedBox(height: 30),
+    // Responsive image height
+    final imageHeight = isWeb
+        ? (screenHeight * 0.4).clamp(200.0, 400.0)
+        : (screenHeight * 0.35).clamp(200.0, 331.0);
 
-          Text(
-            OnboardingData.titles[currentIndex],
-            style: const TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
-            textAlign: TextAlign.center,
-          ),
+    // Responsive padding
+    final horizontalPadding = isWeb
+        ? (screenWidth * 0.1).clamp(20.0, 100.0)
+        : 40.0;
 
-          const SizedBox(height: 26),
-
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40),
-            child: Text(
-              OnboardingData.subTitles[currentIndex],
-              style: const TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.normal,
-                fontSize: 16,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-
-          const SizedBox(height: 60),
-
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 40),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Opacity(
-                  opacity: currentIndex == 2 ? 0.0 : 1.0,
-                  // Transparent tapi space tetap ada
-                  child: TextButton(
-                    onPressed: currentIndex == 2 ? null : onSkip,
-                    // Disable kalau invisible
-                    child: const Text('LEWATI', style: TextStyle(fontSize: 18)),
+    return SingleChildScrollView(
+      child: ConstrainedBox(
+        constraints: BoxConstraints(minHeight: screenHeight),
+        child: IntrinsicHeight(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Image carousel with flexible height
+              Flexible(
+                flex: 3,
+                child: Container(
+                  constraints: BoxConstraints(
+                    maxHeight: imageHeight,
+                    minHeight: 200,
+                  ),
+                  child: CarouselSlider(
+                    items: OnboardingData.images.map((imagePath) {
+                      return Container(
+                        width: screenWidth,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Image.asset(
+                            imagePath,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                color: Colors.grey[300],
+                                child: const Icon(
+                                  Icons.image_not_supported,
+                                  size: 50,
+                                  color: Colors.grey,
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                    options: CarouselOptions(
+                      height: imageHeight,
+                      viewportFraction: isWeb ? 0.8 : 1.0,
+                      enableInfiniteScroll: false,
+                      enlargeCenterPage: isWeb,
+                      onPageChanged: (index, reason) {
+                        onIndexChanged(index);
+                      },
+                    ),
+                    carouselController: carouselController,
                   ),
                 ),
+              ),
 
-                Row(
-                  children: List.generate(3, (index) {
-                    return Container(
-                      margin: const EdgeInsets.only(right: 10),
-                      width: 10,
-                      height: 10,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: currentIndex == index
-                            ? Colors.blue
-                            : Colors.grey,
+              SizedBox(height: screenHeight * 0.03),
+
+              // Content section
+              Flexible(
+                flex: 2,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      // Title
+                      Text(
+                        OnboardingData.titles[currentIndex],
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: isWeb ? 28 : 20,
+                        ),
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                    );
-                  }),
+
+                      SizedBox(height: screenHeight * 0.02),
+
+                      // Subtitle
+                      Text(
+                        OnboardingData.subTitles[currentIndex],
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontWeight: FontWeight.normal,
+                          fontSize: isWeb ? 18 : 16,
+                          height: 1.4,
+                        ),
+                        textAlign: TextAlign.center,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+
+                      SizedBox(height: screenHeight * 0.04),
+
+                      // Navigation controls
+                      _buildNavigationControls(horizontalPadding),
+                    ],
+                  ),
                 ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
-                currentIndex == 2
-                    ? TextButton(
-                        onPressed: onNext,
-                        child: const Text(
-                          'MULAI',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                      )
-                    : TextButton(
-                        onPressed: onNext,
-                        child: const Text(
-                          'LANJUTKAN',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                      ),
-              ],
+  Widget _buildNavigationControls(double horizontalPadding) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: isWeb ? 0 : 0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          // Skip button - flexible width
+          Expanded(
+            flex: 2,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Opacity(
+                opacity: currentIndex == 2 ? 0.0 : 1.0,
+                child: TextButton(
+                  onPressed: currentIndex == 2 ? null : onSkip,
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: isWeb ? 16 : 12,
+                      vertical: 8,
+                    ),
+                    minimumSize: Size.zero,
+                  ),
+                  child: Text(
+                    'LEWATI',
+                    style: TextStyle(
+                      fontSize: isWeb ? 16 : 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          // Page indicators - center
+          Expanded(
+            flex: 1,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(3, (index) {
+                return AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  margin: EdgeInsets.only(right: index == 2 ? 0 : 8),
+                  width: currentIndex == index ? 20 : 10,
+                  height: 10,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: currentIndex == index
+                        ? Colors.blue
+                        : Colors.grey.withOpacity(0.5),
+                  ),
+                );
+              }),
+            ),
+          ),
+
+          // Next/Start button - flexible width
+          Expanded(
+            flex: 2,
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: onNext,
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: isWeb ? 16 : 12,
+                    vertical: 8,
+                  ),
+                  minimumSize: Size.zero,
+                ),
+                child: Text(
+                  currentIndex == 2 ? 'MULAI' : 'LANJUTKAN',
+                  style: TextStyle(
+                    fontSize: isWeb ? 16 : 14,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.blue,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ),
           ),
         ],

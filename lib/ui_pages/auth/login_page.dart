@@ -62,67 +62,88 @@ class LoginPage extends StatelessWidget {
     final TextEditingController passwordController = TextEditingController();
 
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Selamat Datang di Login Page',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight:
+                  MediaQuery.of(context).size.height -
+                  MediaQuery.of(context).padding.top -
+                  MediaQuery.of(context).padding.bottom,
+            ),
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Selamat Datang di Login Page',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
 
-              SizedBox(height: 100),
+                    SizedBox(height: 100),
 
-              Align(alignment: Alignment.centerLeft, child: Text('Username')),
-              SizedBox(height: 8),
-              TextField(
-                controller: usernameController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Default: Abikayusri',
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text('Username'),
+                    ),
+                    SizedBox(height: 8),
+                    TextField(
+                      controller: usernameController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Default: Abikayusri',
+                      ),
+                    ),
+
+                    SizedBox(height: 24),
+
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text('Password'),
+                    ),
+                    SizedBox(height: 8),
+                    TextField(
+                      controller: passwordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Default: Admin123!',
+                      ),
+                    ),
+
+                    SizedBox(height: 48),
+
+                    MaterialButton(
+                      minWidth: double.infinity,
+                      onPressed: () => _login(
+                        context,
+                        usernameController.text.trim(),
+                        passwordController.text.trim(),
+                      ),
+                      color: Colors.teal,
+                      textColor: Colors.white,
+                      child: Text('Login'),
+                    ),
+
+                    SizedBox(height: 24),
+
+                    TextButton(
+                      onPressed: () => _navigateToRegister(context),
+                      child: Text(
+                        'Daftar di sini!',
+                        style: TextStyle(fontSize: 18, color: Colors.blue),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-
-              SizedBox(height: 24),
-
-              Align(alignment: Alignment.centerLeft, child: Text('Password')),
-              SizedBox(height: 8),
-              TextField(
-                controller: passwordController,
-                obscureText: true,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Default: Admin123!',
-                ),
-              ),
-
-              SizedBox(height: 48),
-
-              MaterialButton(
-                minWidth: double.infinity,
-                onPressed: () => _login(
-                  context,
-                  usernameController.text.trim(),
-                  passwordController.text.trim(),
-                ),
-                color: Colors.teal,
-                textColor: Colors.white,
-                child: Text('Login'),
-              ),
-
-              SizedBox(height: 24),
-
-              TextButton(
-                onPressed: () => _navigateToRegister(context),
-                child: Text(
-                  'Daftar di sini!',
-                  style: TextStyle(fontSize: 18, color: Colors.blue),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),
