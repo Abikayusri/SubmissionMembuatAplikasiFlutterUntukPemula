@@ -4,20 +4,31 @@ import 'package:submission_flutter_untuk_pemula/utils/snackbar_extension.dart';
 
 import '../dashboard/home_page.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   static const String defaultUsername = "Abikayusri";
   static const String defaultPassword = "Admin123!";
 
   static String? registeredUsername;
   static String? registeredPassword;
 
-  void _login(
-    BuildContext context,
-    String inputUsername,
-    String inputPassword,
-  ) {
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  void _login(String inputUsername, String inputPassword) {
     if (inputUsername.isEmpty || inputPassword.isEmpty) {
       context.showErrorSnackBar('Username dan Password tidak boleh kosong!');
       return;
@@ -42,7 +53,7 @@ class LoginPage extends StatelessWidget {
     }
   }
 
-  void _navigateToRegister(BuildContext context) async {
+  void _navigateToRegister() async {
     final result = await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => RegisterPage()),
@@ -58,9 +69,6 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController usernameController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
-
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -122,7 +130,6 @@ class LoginPage extends StatelessWidget {
                     MaterialButton(
                       minWidth: double.infinity,
                       onPressed: () => _login(
-                        context,
                         usernameController.text.trim(),
                         passwordController.text.trim(),
                       ),
@@ -134,7 +141,7 @@ class LoginPage extends StatelessWidget {
                     SizedBox(height: 24),
 
                     TextButton(
-                      onPressed: () => _navigateToRegister(context),
+                      onPressed: () => _navigateToRegister(),
                       child: Text(
                         'Daftar di sini!',
                         style: TextStyle(fontSize: 18, color: Colors.blue),

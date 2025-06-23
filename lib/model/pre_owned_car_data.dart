@@ -31,7 +31,7 @@ var preOwnedCarListData = [
     name: 'Xpander Ultimate',
     brand: 'Mitsubishi',
     imageAssets:
-        'https://apollo.olx.co.id/v1/files/68493dc7336e4-ID/image;s=400x800;q=60',
+    'https://apollo.olx.co.id/v1/files/68493dc7336e4-ID/image;s=400x800;q=60',
     price: 'Rp. 198.000.000',
     buyYear: '2008',
     fuelTransmission: 'Bensin-AT',
@@ -77,7 +77,7 @@ Ahlinya Mobil Bekas Berkualitas""",
     name: 'Honda Jazz',
     brand: 'Honda',
     imageAssets:
-        'https://apollo.olx.co.id/v1/files/684a60964c90f-ID/image;s=780x0;q=60',
+    'https://apollo.olx.co.id/v1/files/684a60964c90f-ID/image;s=780x0;q=60',
     price: '179.000.000',
     buyYear: '2016',
     fuelTransmission: 'Bensin-AT',
@@ -110,7 +110,7 @@ Dp Rp.19JT Angs Rp.4.781.000x4thn11bln
     name: 'Nissan X-Trail',
     brand: 'Nissan',
     imageAssets:
-        'https://apollo.olx.co.id/v1/files/68493f6ab35ee-ID/image;s=780x0;q=60',
+    'https://apollo.olx.co.id/v1/files/68527f82c6017-ID/image;s=780x0;q=60',
     price: '160.000.000',
     buyYear: '2015',
     fuelTransmission: 'Bensin-AT',
@@ -118,8 +118,8 @@ Dp Rp.19JT Angs Rp.4.781.000x4thn11bln
     location: "Cempaka Putih, Jakarta Pusat",
     sellerName: "Diler",
     imageUrl: [
-      'https://apollo.olx.co.id/v1/files/68493f6ed434b-ID/image;s=780x0;q=60',
-      'https://apollo.olx.co.id/v1/files/68493f6e6a87e-ID/image;s=780x0;q=60',
+      'https://apollo.olx.co.id/v1/files/68527f853f09b-ID/image;s=780x0;q=60',
+      'https://apollo.olx.co.id/v1/files/68527f82bf571-ID/image;s=780x0;q=60',
     ],
     description: r"""
 .
@@ -166,7 +166,7 @@ Ahlinya Mobil Bekas Berkualitas
     name: 'Honda Brio Satya',
     brand: 'Honda',
     imageAssets:
-        'https://apollo.olx.co.id/v1/files/68494013c92e9-ID/image;s=780x0;q=60',
+    'https://apollo.olx.co.id/v1/files/68494013c92e9-ID/image;s=780x0;q=60',
     price: '117.000.000',
     buyYear: '2017',
     fuelTransmission: 'Bensin-MT',
@@ -223,7 +223,7 @@ Ahlinya Mobil Bekas Berkualitas
     name: 'Wuling Almaz RS',
     brand: 'Wuling',
     imageAssets:
-        'https://apollo.olx.co.id/v1/files/68493d51ecf15-ID/image;s=780x0;q=60',
+    'https://apollo.olx.co.id/v1/files/684cd6d2db4e0-ID/image;s=780x0;q=60',
     price: '210.000.000',
     buyYear: '2022',
     fuelTransmission: 'Bensin-AT',
@@ -231,9 +231,9 @@ Ahlinya Mobil Bekas Berkualitas
     location: "Cempaka Putih, Jakarta Pusat",
     sellerName: "Diler",
     imageUrl: [
-      'https://apollo.olx.co.id/v1/files/68493d51e468e-ID/image;s=780x0;q=60',
-      'https://apollo.olx.co.id/v1/files/68493d5109ec4-ID/image;s=780x0;q=60',
-      'https://apollo.olx.co.id/v1/files/68493d520ac24-ID/image;s=780x0;q=60',
+      'https://apollo.olx.co.id/v1/files/684cd6d1c820a-ID/image;s=780x0;q=60',
+      'https://apollo.olx.co.id/v1/files/684cd6d168fb6-ID/image;s=780x0;q=60',
+      'https://apollo.olx.co.id/v1/files/684cd6d252f1e-ID/image;s=780x0;q=60',
     ],
     description: r"""
 .
@@ -280,7 +280,7 @@ Ahlinya Mobil Bekas Berkualitas
     name: 'Mercedes-Benz GLE450 ',
     brand: 'Mercedes-Benz',
     imageAssets:
-        'https://apollo.olx.co.id/v1/files/680cddfb706bb-ID/image;s=1080x1080',
+    'https://apollo.olx.co.id/v1/files/680cddfb706bb-ID/image;s=1080x1080',
     price: '1.195.000.000',
     buyYear: '2022',
     fuelTransmission: 'Bensin-AT',
@@ -339,7 +339,7 @@ Bursa mobil bintaro A28-29""",
     name: 'Toyota Fortuner',
     brand: 'Toyota',
     imageAssets:
-        'https://apollo.olx.co.id/v1/files/6847f3c2b4e6a-ID/image;s=1080x1080',
+    'https://apollo.olx.co.id/v1/files/6847f3c2b4e6a-ID/image;s=1080x1080',
     price: '435.000.000',
     buyYear: '2021',
     fuelTransmission: 'Bensin-AT',
@@ -397,7 +397,7 @@ Jalan Gunung Sahari No. 1 Jakarta utara""",
     name: "Honda HR-V",
     brand: "Honda",
     imageAssets:
-        'https://apollo.olx.co.id/v1/files/68285f535893c-ID/image;s=780x0;q=60',
+    'https://apollo.olx.co.id/v1/files/68285f535893c-ID/image;s=780x0;q=60',
     price: '340.000.000',
     buyYear: '2022',
     fuelTransmission: 'Bensin-AT',
@@ -431,7 +431,7 @@ More info PM""",
     name: 'Toyota Alphard',
     brand: 'Toyota',
     imageAssets:
-        'https://apollo.olx.co.id/v1/files/6828cb4a1e910-ID/image;s=780x0;q=60',
+    'https://apollo.olx.co.id/v1/files/6828cb4a1e910-ID/image;s=780x0;q=60',
     price: '549.000.000',
     buyYear: '2018',
     fuelTransmission: 'Bensin-AT',
