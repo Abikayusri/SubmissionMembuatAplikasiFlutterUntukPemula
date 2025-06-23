@@ -77,7 +77,7 @@ Ahlinya Mobil Bekas Berkualitas""",
     name: 'Honda Jazz',
     brand: 'Honda',
     imageAssets:
-        'https://apollo.olx.co.id/v1/files/6840225dbb87c-ID/image;s=780x0;q=60',
+        'https://apollo.olx.co.id/v1/files/684a60964c90f-ID/image;s=780x0;q=60',
     price: '179.000.000',
     buyYear: '2016',
     fuelTransmission: 'Bensin-AT',
@@ -85,9 +85,9 @@ Ahlinya Mobil Bekas Berkualitas""",
     location: "Cempaka Putih, Jakarta Pusat",
     sellerName: "Budi",
     imageUrl: [
-      'https://apollo.olx.co.id/v1/files/6840225d2eaf6-ID/image;s=780x0;q=60',
-      'https://apollo.olx.co.id/v1/files/6840225d5878b-ID/image;s=780x0;q=60',
-      'https://apollo.olx.co.id/v1/files/6840225da08ac-ID/image;s=780x0;q=60',
+      'https://apollo.olx.co.id/v1/files/684a6097985c7-ID/image;s=780x0;q=60',
+      'https://apollo.olx.co.id/v1/files/684a60972f308-ID/image;s=780x0;q=60',
+      'https://apollo.olx.co.id/v1/files/684a6098bb98a-ID/image;s=780x0;q=60',
     ],
     description: r"""
 Honda All New Jazz Rs 1.5 A/T Thn 2017 Nik 2016
