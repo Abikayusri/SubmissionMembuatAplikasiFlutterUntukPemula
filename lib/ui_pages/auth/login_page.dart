@@ -4,20 +4,36 @@ import 'package:submission_flutter_untuk_pemula/utils/snackbar_extension.dart';
 
 import '../dashboard/home_page.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage>
+    with AutomaticKeepAliveClientMixin {
   static const String defaultUsername = "Abikayusri";
   static const String defaultPassword = "Admin123!";
 
   static String? registeredUsername;
   static String? registeredPassword;
 
-  void _login(
-    BuildContext context,
-    String inputUsername,
-    String inputPassword,
-  ) {
+  // Controllers as instance variables
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  void _login(String inputUsername, String inputPassword) {
     if (inputUsername.isEmpty || inputPassword.isEmpty) {
       context.showErrorSnackBar('Username dan Password tidak boleh kosong!');
       return;
@@ -42,7 +58,7 @@ class LoginPage extends StatelessWidget {
     }
   }
 
-  void _navigateToRegister(BuildContext context) async {
+  void _navigateToRegister() async {
     final result = await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => RegisterPage()),
@@ -58,13 +74,13 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController usernameController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
+    super.build(context); // Required for AutomaticKeepAliveClientMixin
 
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     final isWeb = screenWidth > 600;
 
+    // Responsive padding
     final horizontalPadding = isWeb
         ? (screenWidth * 0.2).clamp(20.0, 200.0)
         : 16.0;
@@ -86,11 +102,13 @@ class LoginPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    // Top spacer - flexible
                     Flexible(
                       flex: 1,
                       child: SizedBox(height: screenHeight * 0.05),
                     ),
 
+                    // Welcome text
                     Text(
                       'Selamat Datang di Login Page',
                       style: TextStyle(
@@ -103,15 +121,17 @@ class LoginPage extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
 
+                    // Spacing after title
                     SizedBox(height: screenHeight * 0.08),
 
+                    // Login form
                     _buildLoginForm(
-                      context,
                       usernameController,
                       passwordController,
                       isWeb,
                     ),
 
+                    // Bottom spacer - flexible
                     Flexible(
                       flex: 1,
                       child: SizedBox(height: screenHeight * 0.05),
@@ -127,7 +147,6 @@ class LoginPage extends StatelessWidget {
   }
 
   Widget _buildLoginForm(
-    BuildContext context,
     TextEditingController usernameController,
     TextEditingController passwordController,
     bool isWeb,
@@ -137,6 +156,7 @@ class LoginPage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        // Username field
         _buildInputField(
           label: 'Username',
           controller: usernameController,
@@ -146,6 +166,7 @@ class LoginPage extends StatelessWidget {
 
         SizedBox(height: screenHeight * 0.03),
 
+        // Password field
         _buildInputField(
           label: 'Password',
           controller: passwordController,
@@ -156,16 +177,13 @@ class LoginPage extends StatelessWidget {
 
         SizedBox(height: screenHeight * 0.06),
 
-        _buildLoginButton(
-          context,
-          usernameController,
-          passwordController,
-          isWeb,
-        ),
+        // Login button
+        _buildLoginButton(usernameController, passwordController, isWeb),
 
         SizedBox(height: screenHeight * 0.03),
 
-        _buildRegisterLink(context, isWeb),
+        // Register link
+        _buildRegisterLink(isWeb),
       ],
     );
   }
@@ -224,7 +242,6 @@ class LoginPage extends StatelessWidget {
   }
 
   Widget _buildLoginButton(
-    BuildContext context,
     TextEditingController usernameController,
     TextEditingController passwordController,
     bool isWeb,
@@ -233,7 +250,6 @@ class LoginPage extends StatelessWidget {
       height: isWeb ? 56 : 48,
       child: ElevatedButton(
         onPressed: () => _login(
-          context,
           usernameController.text.trim(),
           passwordController.text.trim(),
         ),
@@ -254,10 +270,10 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _buildRegisterLink(BuildContext context, bool isWeb) {
+  Widget _buildRegisterLink(bool isWeb) {
     return Center(
       child: TextButton(
-        onPressed: () => _navigateToRegister(context),
+        onPressed: () => _navigateToRegister(),
         style: TextButton.styleFrom(
           padding: EdgeInsets.symmetric(
             horizontal: isWeb ? 24 : 16,
